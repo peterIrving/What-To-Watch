@@ -12,6 +12,12 @@ class PosterAndTitleCVCell: UICollectionViewCell {
 
     @IBOutlet weak var posterImage: CustomImageView!
     @IBOutlet weak var movieTitle: UILabel!
+    @IBOutlet weak var backdropView: CustomImageView! {
+        didSet {
+            backdropView.alpha = 0.3
+            
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()

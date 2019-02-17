@@ -24,8 +24,6 @@ class SingleViewController: UIViewController, UICollectionViewDelegate, UICollec
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        collectionView.register(UINib(nibName: "PosterAndTitleCVCell", bundle: nil), forCellWithReuseIdentifier: "posterAndTitleCell")
-        collectionView.register(UINib(nibName: "MovieDetailsCVCell", bundle: nil), forCellWithReuseIdentifier: "movieDetailsCell")
     }
     
 //    private func setupView() {
@@ -53,12 +51,17 @@ class SingleViewController: UIViewController, UICollectionViewDelegate, UICollec
         
         if indexPath.row == 0 {
             if let movie = arrayOfMovies?.results![movieIndex!] {
+                titleCell.backdropView.loadImageUsingURL(urlString: "https://image.tmdb.org/t/p/w500\(movie.backdropPath!)")
                 titleCell.posterImage.loadImageUsingURL(urlString: "https://image.tmdb.org/t/p/w500\(movie.posterPath!)")
                 titleCell.movieTitle.text = movie.originalTitle
             }
             return titleCell
         }
         else {
+            if let movie = arrayOfMovies?.results![movieIndex!] {
+                detailCell.summary.text = movie.overview
+                detailCell.adjustTextView()
+            }
             return detailCell
         }
     }

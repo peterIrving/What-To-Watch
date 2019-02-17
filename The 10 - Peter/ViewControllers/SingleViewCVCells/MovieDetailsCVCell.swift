@@ -9,10 +9,19 @@
 import UIKit
 
 class MovieDetailsCVCell: UICollectionViewCell {
-
+    
+    
+@IBOutlet weak var textViewHC: NSLayoutConstraint!
+    @IBOutlet weak var summary: UITextView!
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
+    func adjustTextView() {
+        textViewHC.constant = self.summary.contentSize.height
+
+    }
+    
 }

@@ -154,12 +154,116 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="R2r-N6-BBJ">
-                            <size key="itemSize" width="375" height="200"/>
+                            <size key="itemSize" width="369" height="210"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
-                        <cells/>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="posterAndTitleCell" id="mgK-nc-TVB" customClass="PosterAndTitleCVCell" customModule="The_10___Peter" customModuleProvider="target">
+                                <rect key="frame" x="3" y="0.0" width="369" height="210"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="369" height="210"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7CO-NM-coY">
+                                            <rect key="frame" x="0.0" y="0.0" width="369" height="210"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="I7u-B0-aO9" customClass="CustomImageView" customModule="The_10___Peter" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="369" height="210"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="q0b-ee-H1O" customClass="CustomImageView" customModule="The_10___Peter" customModuleProvider="target">
+                                                    <rect key="frame" x="265" y="46" width="96" height="156"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="156" id="2MG-lT-lX6"/>
+                                                        <constraint firstAttribute="width" constant="96" id="6jM-VU-dT7"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9p0-rO-qk0">
+                                                    <rect key="frame" x="8" y="165" width="249" height="37"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="249" id="OzR-aH-tHC"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="31"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="q0b-ee-H1O" secondAttribute="bottom" constant="8" id="Ul6-Em-hqx"/>
+                                                <constraint firstAttribute="trailing" secondItem="q0b-ee-H1O" secondAttribute="trailing" constant="8" id="c5b-iA-N25"/>
+                                                <constraint firstAttribute="bottom" secondItem="9p0-rO-qk0" secondAttribute="bottom" constant="8" id="jPS-gV-xuX"/>
+                                                <constraint firstItem="9p0-rO-qk0" firstAttribute="leading" secondItem="7CO-NM-coY" secondAttribute="leading" constant="8" id="o8d-iH-3VE"/>
+                                            </constraints>
+                                        </view>
+                                    </subviews>
+                                </view>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="7CO-NM-coY" secondAttribute="bottom" id="5H7-Wm-TE3"/>
+                                    <constraint firstItem="7CO-NM-coY" firstAttribute="leading" secondItem="mgK-nc-TVB" secondAttribute="leading" id="JQ6-AG-Xy0"/>
+                                    <constraint firstAttribute="trailing" secondItem="7CO-NM-coY" secondAttribute="trailing" id="Nmw-Hg-98P"/>
+                                    <constraint firstItem="7CO-NM-coY" firstAttribute="top" secondItem="mgK-nc-TVB" secondAttribute="top" id="eyN-Ea-5pN"/>
+                                </constraints>
+                                <viewLayoutGuide key="safeArea" id="HkL-PT-blZ"/>
+                                <size key="customSize" width="369" height="210"/>
+                                <connections>
+                                    <outlet property="backdropView" destination="I7u-B0-aO9" id="sil-ce-TRd"/>
+                                    <outlet property="movieTitle" destination="9p0-rO-qk0" id="8dp-WR-0KH"/>
+                                    <outlet property="posterImage" destination="q0b-ee-H1O" id="dzL-FT-bF6"/>
+                                </connections>
+                            </collectionViewCell>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="movieDetailsCell" id="Ar0-l4-5UM" customClass="MovieDetailsCVCell" customModule="The_10___Peter" customModuleProvider="target">
+                                <rect key="frame" x="3" y="220" width="369" height="240"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                    <rect key="frame" x="0.0" y="0.0" width="369" height="240"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Summary" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hGY-ms-ckj">
+                                            <rect key="frame" x="20" y="6" width="91" height="26.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YvX-TG-wfX">
+                                            <rect key="frame" x="20" y="44.5" width="329" height="175"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="175" id="Ahn-vY-p2y"/>
+                                            </constraints>
+                                            <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        </textView>
+                                    </subviews>
+                                </view>
+                                <color key="backgroundColor" red="0.1176470588" green="0.71764705880000002" blue="0.92156862750000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="hGY-ms-ckj" firstAttribute="top" secondItem="Ar0-l4-5UM" secondAttribute="top" constant="6" id="2Do-GV-OUC"/>
+                                    <constraint firstItem="YvX-TG-wfX" firstAttribute="top" secondItem="hGY-ms-ckj" secondAttribute="bottom" constant="12" id="6vJ-sT-Z09"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="YvX-TG-wfX" secondAttribute="trailing" constant="12" id="Jwq-6m-g74"/>
+                                    <constraint firstItem="hGY-ms-ckj" firstAttribute="leading" secondItem="Ar0-l4-5UM" secondAttribute="leadingMargin" constant="12" id="W1J-82-ff4"/>
+                                    <constraint firstItem="YvX-TG-wfX" firstAttribute="leading" secondItem="Ar0-l4-5UM" secondAttribute="leadingMargin" constant="12" id="aBB-Is-EHb"/>
+                                </constraints>
+                                <size key="customSize" width="369" height="240"/>
+                                <connections>
+                                    <outlet property="summary" destination="YvX-TG-wfX" id="p2B-G2-GWA"/>
+                                    <outlet property="textViewHC" destination="Ahn-vY-p2y" id="Qd9-Nn-2eD"/>
+                                </connections>
+                            </collectionViewCell>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="1ow-tl-XOi">
+                                <rect key="frame" x="3" y="470" width="369" height="210"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                    <rect key="frame" x="0.0" y="0.0" width="369" height="210"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </view>
+                            </collectionViewCell>
+                        </cells>
                         <connections>
                             <outlet property="dataSource" destination="DSX-LW-nrg" id="tPd-xs-qHd"/>
                             <outlet property="delegate" destination="DSX-LW-nrg" id="epY-q8-Abc"/>
