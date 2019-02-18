@@ -8,61 +8,86 @@
 
 import UIKit
 
-class SingleViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource  {
-    
-    
-
-    @IBOutlet var collectionView: UICollectionView!
-    @IBOutlet weak var backdropImage: CustomImageView!
-    @IBOutlet weak var posterImage: CustomImageView!
-    @IBOutlet weak var movieTitle: UILabel!
-    @IBOutlet weak var summary: UITextView!
-    
+class SingleViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+        
     var arrayOfMovies: MovieList?
     var movieIndex: Int?
+    var backgroundColor: UIColor = .white
+    var isNowPlaying: Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        if isNowPlaying {
+            collectionView.backgroundColor = UIColor.getCrimson()
+        } else {
+            collectionView.backgroundColor = UIColor.getRed()
+        }
+        
+        collectionView.register(TitleAndPosterCell.self, forCellWithReuseIdentifier: "titleAndPosterCell")
+        collectionView.register(DetailsCell.self, forCellWithReuseIdentifier: "detailsCell")
+        collectionView.register(SummaryCell.self, forCellWithReuseIdentifier: "summaryCell")
+        collectionView.register(ErrorLoadingDataCell.self, forCellWithReuseIdentifier: "errorCell")
     }
     
-//    private func setupView() {
-//        if let movie = arrayOfMovies?.results![movieIndex!] {
-//            backdropImage.loadImageUsingURL(urlString: "https://image.tmdb.org/t/p/w500\(movie.backdropPath!)")
-//            posterImage.loadImageUsingURL(urlString: "https://image.tmdb.org/t/p/w500\(movie.posterPath!)")
-//            movieTitle.text = movie.title
-//            summary.text = movie.overview
-//        }
-//
-//    }
-    
-
-        
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 3
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        // guard let movie = arrayOfMovies?.results![movieIndex!] else { return errorLoadingCell}
-        
-        let titleCell = collectionView.dequeueReusableCell(withReuseIdentifier: "posterAndTitleCell", for: indexPath) as! PosterAndTitleCVCell
-        let detailCell = collectionView.dequeueReusableCell(withReuseIdentifier: "movieDetailsCell", for: indexPath) as! MovieDetailsCVCell
-        
-        if indexPath.row == 0 {
-            if let movie = arrayOfMovies?.results![movieIndex!] {
-                titleCell.backdropView.loadImageUsingURL(urlString: "https://image.tmdb.org/t/p/w500\(movie.backdropPath!)")
-                titleCell.posterImage.loadImageUsingURL(urlString: "https://image.tmdb.org/t/p/w500\(movie.posterPath!)")
-                titleCell.movieTitle.text = movie.originalTitle
+        if let movie = arrayOfMovies?.results?[movieIndex!] {
+            
+            if indexPath.row == 0 {
+                
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "titleAndPosterCell", for: indexPath) as! TitleAndPosterCell
+                cell.posterImageView.loadImageUsingURL(pathAppendix: movie.posterPath!)
+                cell.titleLabel.text = movie.title
+                return cell
+                
+            } else if indexPath.row == 1 {
+                
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "detailsCell", for: indexPath) as! DetailsCell
+                
+                let languageAbbr: String = movie.originalLanguage ?? ""
+                cell.languageLabel.text = "Language: \(MovieDataHelpers.fullLanguageName(languageAbbrv: languageAbbr))"
+                cell.releaseDateLabel.text = "Release date: \(movie.releaseDate!)"
+                cell.genreLabel.text = MovieDataHelpers.grabGenres(listOfIds: movie.genreIDS!)
+                
+                return cell
+                
+            } else if indexPath.row == 2 {
+                
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "summaryCell", for: indexPath) as! SummaryCell
+                cell.summaryTextView.text = movie.overview
+                
+                return cell
+                
             }
-            return titleCell
+            else {
+                
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "errorCell", for: indexPath)
+                return cell
+            }
         }
         else {
-            if let movie = arrayOfMovies?.results![movieIndex!] {
-                detailCell.summary.text = movie.overview
-                detailCell.adjustTextView()
-            }
-            return detailCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "errorCell", for: indexPath)
+            return cell
+        }
+
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        if indexPath.row == 0 {
+            return CGSize(width: view.frame.width, height: 440)
+        }
+        else if indexPath.row == 1{
+            return CGSize(width: view.frame.width, height: 150)
+        } else {
+            return CGSize(width: view.frame.width, height: view.frame.width + 80)
         }
     }
+    
 }

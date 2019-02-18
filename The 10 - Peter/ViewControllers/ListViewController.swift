@@ -8,21 +8,48 @@
 
 import UIKit
 
-class ListViewController: UIViewController {
+class ListViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
-    @IBOutlet weak var collectionView: UICollectionView!
     var arrayOfMovies: MovieList?
     var selectionIndex: IndexPath.Element?
+    var isNowPlaying: Bool = true
+    
+    var previousSelected: IndexPath?
+    var currentSelected: Int?
     
     let networkingClient = NetworkingClient()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if isNowPlaying {
+            collectionView.backgroundColor = UIColor.getCrimson()
+            grabContent(urlString: getNowPlaying)
+        } else {
+            collectionView.backgroundColor = UIColor.getRed()
+            grabContent(urlString: getUpcoming)
+        }
+        
+        collectionView.register(ListViewCVCell.self, forCellWithReuseIdentifier: "movieCell")
         collectionView.addGestureRecognizer(createTapGesture())
+        
+        collectionView.reloadData()
+        
+        
     }
-
-    @IBAction func dismissClick(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+    
+    private func grabContent(urlString: String) {
+        guard let url = URL(string: urlString) else { return }
+        
+        networkingClient.grabMovieList(url) { (movieList, error) in
+            if let error = error {
+                print(error)
+                return
+            }
+            self.arrayOfMovies = movieList
+            
+        }
     }
     
     private func createTapGesture() -> UITapGestureRecognizer{
@@ -36,45 +63,25 @@ class ListViewController: UIViewController {
         
         destinationVC.arrayOfMovies = arrayOfMovies
         destinationVC.movieIndex = selectionIndex
+        destinationVC.isNowPlaying = isNowPlaying
     }
     
     @objc func tap(sender: UITapGestureRecognizer) {
         let point = sender.location(in: collectionView)
         if let indexPath = collectionView?.indexPathForItem(at: point) {
             
+            
             selectionIndex = indexPath[1]
             performSegue(withIdentifier: "goToSingle", sender: self)
-            print(arrayOfMovies?.results![selectionIndex!])
-            
         }
     }
-    
-    @IBAction func nowPlayingClick(_ sender: Any) {
-        grabContent(urlString: getNowPlaying)
-    }
-    
-    @IBAction func comingSoonClick(_ sender: Any) {
-        grabContent(urlString: getUpcoming)
-    }
-    
-    private func grabContent(urlString: String) {
-        guard let url = URL(string: urlString) else { return }
-        
-        networkingClient.executeURLSession(url) { (movieList) in
-            self.arrayOfMovies = movieList
-        }
-        self.collectionView.reloadData()
-    }
-    
-}
 
-extension ListViewController: UICollectionViewDelegate,UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 10
         
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "movieCell", for: indexPath) as! ListViewCVCell
         
         if let movies = arrayOfMovies?.results! {
@@ -82,12 +89,18 @@ extension ListViewController: UICollectionViewDelegate,UICollectionViewDataSourc
             let movie = movies[indexPath.row]
             
             if let backdropPath = movie.backdropPath {
-                cell.posterImage.loadImageUsingURL(urlString: "https://image.tmdb.org/t/p/w500\(backdropPath)")
+                cell.backdropImageView.loadImageUsingURL(pathAppendix: backdropPath)
             }
-            cell.posterImage.contentMode = .scaleAspectFit
+            cell.backdropImageView.contentMode = .scaleAspectFit
         }
         cell.layoutIfNeeded()
         return cell
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        return CGSize(width: view.frame.width - 24, height: ((view.frame.width - 16) * 9 / 16))
     }
 }
 

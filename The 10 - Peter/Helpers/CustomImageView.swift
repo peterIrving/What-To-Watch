@@ -15,12 +15,17 @@ class CustomImageView: UIImageView {
     private var imageUrlString: String?
     private var imageDownloadTask: URLSessionDataTask?
     
-    func loadImageUsingURL(urlString: String) {
+    let pathToImages = "https://image.tmdb.org/t/p/w500"
+    
+    func loadImageUsingURL(pathAppendix: String) {
+        
+        let urlString = pathToImages + pathAppendix
+        
         imageUrlString = urlString
         let nsString = NSString(string: urlString)
         let session = URLSession.shared
         
-        // if image is already stored in cache, then set image to that stored image
+        // saves url into cache as NSString
         if let imageFromCache = imageCache.object(forKey: nsString) {
             self.image = imageFromCache
             return

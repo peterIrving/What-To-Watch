@@ -15,6 +15,7 @@ class WelcomeViewController: UIViewController {
     
     var tapIndex: Int = 0
     let networkingClient = NetworkingClient()
+    var isReadyToSegue: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,13 +47,12 @@ class WelcomeViewController: UIViewController {
         let destinationVC: ListViewController = segue.destination as! ListViewController
         
         if tapIndex == 0 {
-            grabContent(urlString: getNowPlaying, destinationVC: destinationVC)
             destinationVC.navigationItem.title = "In Theaters"
-
+            destinationVC.isNowPlaying = true
         }
         if tapIndex == 1 {
-            grabContent(urlString: getUpcoming, destinationVC: destinationVC)
             destinationVC.navigationItem.title = "Coming Soon"
+            destinationVC.isNowPlaying = false
         }
         
     }
@@ -60,7 +60,11 @@ class WelcomeViewController: UIViewController {
     private func grabContent(urlString: String, destinationVC: ListViewController) {
         guard let url = URL(string: urlString) else { return }
         
-        networkingClient.executeURLSession(url) { (movieList) in
+        networkingClient.grabMovieList(url) { (movieList, error) in
+            if let error = error {
+                print(error)
+                return
+            }
             destinationVC.arrayOfMovies = movieList
         }
     }

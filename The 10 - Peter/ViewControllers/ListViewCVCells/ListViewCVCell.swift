@@ -10,6 +10,34 @@ import UIKit
 
 class ListViewCVCell: UICollectionViewCell {
     
-    @IBOutlet weak var movieTitleLabel: UILabel!
-    @IBOutlet weak var posterImage: CustomImageView!
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        setupViews()
+    }
+    
+    let backdropImageView: CustomImageView = {
+        
+        let imageView = CustomImageView()
+        imageView.contentMode = .scaleAspectFill
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.backgroundColor = .black
+        
+        return imageView
+    }()
+    
+    func setupViews() {
+        self.backgroundColor = .black
+        
+        addSubview(backdropImageView)
+        
+        addConstraintsWithFormat(format: "V:|[v0]|", views: backdropImageView)
+        addConstraintsWithFormat(format: "H:|-6-[v0]-6-|", views: backdropImageView)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
 }
+
