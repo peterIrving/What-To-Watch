@@ -60,7 +60,31 @@ class SingleViewController: UICollectionViewController, UICollectionViewDelegate
             } else if indexPath.row == 2 {
                 
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "summaryCell", for: indexPath) as! SummaryCell
-                cell.summaryTextView.text = movie.overview
+                
+                // MARK: - Here I am trying to loop backwards through the overview to truncate super long overviews, like T-34. Not enough time.
+                
+//                if let count = movie.overview?.count {
+//
+//
+//                    var overview = movie.overview
+//
+//                    if count > 445 {
+//                        print("greater than 445")
+//
+//
+//                        for char in (overview)!.reversed() {
+//                            if char == "." {
+//                                break
+//                            }
+//                            else {
+//                                print(char)
+//                            }
+//                        }
+//                    }
+//                    else {
+                        cell.summaryTextView.text = movie.overview
+//                    }
+//                }
                 
                 return cell
                 

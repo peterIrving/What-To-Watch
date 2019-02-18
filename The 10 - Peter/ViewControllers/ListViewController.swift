@@ -34,9 +34,6 @@ class ListViewController: UICollectionViewController, UICollectionViewDelegateFl
         collectionView.register(ListViewCVCell.self, forCellWithReuseIdentifier: "movieCell")
         collectionView.addGestureRecognizer(createTapGesture())
         
-        collectionView.reloadData()
-        
-        
     }
     
     private func grabContent(urlString: String) {
@@ -48,8 +45,12 @@ class ListViewController: UICollectionViewController, UICollectionViewDelegateFl
                 return
             }
             self.arrayOfMovies = movieList
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
             
         }
+        
     }
     
     private func createTapGesture() -> UITapGestureRecognizer{
@@ -94,6 +95,7 @@ class ListViewController: UICollectionViewController, UICollectionViewDelegateFl
             cell.backdropImageView.contentMode = .scaleAspectFit
         }
         cell.layoutIfNeeded()
+
         return cell
     }
     
