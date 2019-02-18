@@ -6,6 +6,15 @@
 //  Copyright © 2019 Peter Irving. All rights reserved.
 //
 
+// TODO:
+
+//1) truncate uber long text or shrink cell size, and force someone to click on cell to read entire summary
+//2) black borders around welcome buttons and single view poster(and border)
+//3) darken welcome buttons on selection
+//4) on list pan, darken cv cell and show title
+//5) loading screens(primarily for displaying list view)
+//6) image expander on poster (and summary)
+
 import UIKit
 
 class WelcomeViewController: UIViewController {
