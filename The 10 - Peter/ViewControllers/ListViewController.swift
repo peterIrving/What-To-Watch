@@ -34,6 +34,8 @@ class ListViewController: UICollectionViewController, UICollectionViewDelegateFl
         collectionView.register(ListViewCVCell.self, forCellWithReuseIdentifier: "movieCell")
         collectionView.addGestureRecognizer(createTapGesture())
         
+        collectionView?.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 0, right: 0)
+        collectionView.scrollIndicatorInsets = UIEdgeInsets(top: 12, left: 0, bottom: 0, right: 0)
     }
     
     private func grabContent(urlString: String) {
@@ -71,7 +73,6 @@ class ListViewController: UICollectionViewController, UICollectionViewDelegateFl
         let point = sender.location(in: collectionView)
         if let indexPath = collectionView?.indexPathForItem(at: point) {
             
-            
             selectionIndex = indexPath[1]
             performSegue(withIdentifier: "goToSingle", sender: self)
         }
@@ -88,6 +89,8 @@ class ListViewController: UICollectionViewController, UICollectionViewDelegateFl
         if let movies = arrayOfMovies?.results! {
             
             let movie = movies[indexPath.row]
+            
+            cell.titleLabel.text = movie.title
             
             if let backdropPath = movie.backdropPath {
                 cell.backdropImageView.loadImageUsingURL(pathAppendix: backdropPath)

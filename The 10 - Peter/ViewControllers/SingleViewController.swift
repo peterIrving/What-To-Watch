@@ -28,6 +28,8 @@ class SingleViewController: UICollectionViewController, UICollectionViewDelegate
         collectionView.register(DetailsCell.self, forCellWithReuseIdentifier: "detailsCell")
         collectionView.register(SummaryCell.self, forCellWithReuseIdentifier: "summaryCell")
         collectionView.register(ErrorLoadingDataCell.self, forCellWithReuseIdentifier: "errorCell")
+        
+        collectionView.isMultipleTouchEnabled = true
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
