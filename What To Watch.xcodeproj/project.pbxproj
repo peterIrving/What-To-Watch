@@ -22,7 +22,7 @@
 		9DFD29322213ED6200D35B0D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9DFD29312213ED6200D35B0D /* Assets.xcassets */; };
 		9DFD29352213ED6200D35B0D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DFD29332213ED6200D35B0D /* LaunchScreen.storyboard */; };
 		9DFD293D22149B4400D35B0D /* NetworkingClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DFD293C22149B4400D35B0D /* NetworkingClient.swift */; };
-		9DFD293F2214A72800D35B0D /* JSONStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DFD293E2214A72800D35B0D /* JSONStructs.swift */; };
+		9DFD293F2214A72800D35B0D /* MovieListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DFD293E2214A72800D35B0D /* MovieListModel.swift */; };
 		9DFD29412214BC1100D35B0D /* CustomImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DFD29402214BC1100D35B0D /* CustomImageView.swift */; };
 		9DFD294522153B1800D35B0D /* API_URLS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DFD294422153B1800D35B0D /* API_URLS.swift */; };
 /* End PBXBuildFile section */
@@ -37,7 +37,7 @@
 		9DD235CB221A5A3A00674B3C /* DetailsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsCell.swift; sourceTree = "<group>"; };
 		9DD235CD221A5A6000674B3C /* SummaryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryCell.swift; sourceTree = "<group>"; };
 		9DD235CF221A7ECB00674B3C /* MovieDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDataHelpers.swift; sourceTree = "<group>"; };
-		9DFD29272213ED5E00D35B0D /* The 10 - Peter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "The 10 - Peter.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9DFD29272213ED5E00D35B0D /* What To Watch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "What To Watch.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DFD292A2213ED5E00D35B0D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9DFD292C2213ED5E00D35B0D /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		9DFD292F2213ED5E00D35B0D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -45,7 +45,7 @@
 		9DFD29342213ED6200D35B0D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9DFD29362213ED6200D35B0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9DFD293C22149B4400D35B0D /* NetworkingClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingClient.swift; sourceTree = "<group>"; };
-		9DFD293E2214A72800D35B0D /* JSONStructs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONStructs.swift; sourceTree = "<group>"; };
+		9DFD293E2214A72800D35B0D /* MovieListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListModel.swift; sourceTree = "<group>"; };
 		9DFD29402214BC1100D35B0D /* CustomImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImageView.swift; sourceTree = "<group>"; };
 		9DFD294422153B1800D35B0D /* API_URLS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API_URLS.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -61,14 +61,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		9DCA3906221647AC0010CFCB /* Networking */ = {
+		9D3D6B42221DD3F600E8A2A9 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				9DFD293C22149B4400D35B0D /* NetworkingClient.swift */,
+				9DFD294422153B1800D35B0D /* API_URLS.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
 		};
-		9DCA390D2217253A0010CFCB /* ViewControllers */ = {
+		9D3D6B43221DD41200E8A2A9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				9DFD293E2214A72800D35B0D /* MovieListModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		9DCA390D2217253A0010CFCB /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				9D77CAEF22162B18009AC841 /* WelcomeViewController.swift */,
@@ -77,7 +87,7 @@
 				9DCA3910221733D40010CFCB /* ListViewCVCells */,
 				9DFC705222188D2E00B76993 /* SingleViewCVCells */,
 			);
-			path = ViewControllers;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		9DCA3910221733D40010CFCB /* ListViewCVCells */ = {
@@ -112,7 +122,7 @@
 		9DFD291E2213ED5E00D35B0D = {
 			isa = PBXGroup;
 			children = (
-				9DFD29292213ED5E00D35B0D /* The 10 - Peter */,
+				9DFD29292213ED5E00D35B0D /* What To Watch */,
 				9DFD29282213ED5E00D35B0D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -120,35 +130,33 @@
 		9DFD29282213ED5E00D35B0D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9DFD29272213ED5E00D35B0D /* The 10 - Peter.app */,
+				9DFD29272213ED5E00D35B0D /* What To Watch.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		9DFD29292213ED5E00D35B0D /* The 10 - Peter */ = {
+		9DFD29292213ED5E00D35B0D /* What To Watch */ = {
 			isa = PBXGroup;
 			children = (
 				9DFD292E2213ED5E00D35B0D /* Main.storyboard */,
-				9DD235D1221A9BFE00674B3C /* Helpers */,
 				9DFD292A2213ED5E00D35B0D /* AppDelegate.swift */,
-				9DFD294422153B1800D35B0D /* API_URLS.swift */,
-				9DFD293E2214A72800D35B0D /* JSONStructs.swift */,
-				9DFD293C22149B4400D35B0D /* NetworkingClient.swift */,
-				9DCA390D2217253A0010CFCB /* ViewControllers */,
-				9DCA3906221647AC0010CFCB /* Networking */,
+				9D3D6B43221DD41200E8A2A9 /* Model */,
+				9D3D6B42221DD3F600E8A2A9 /* Networking */,
+				9DD235D1221A9BFE00674B3C /* Helpers */,
+				9DCA390D2217253A0010CFCB /* Views */,
 				9DFD29312213ED6200D35B0D /* Assets.xcassets */,
 				9DFD29332213ED6200D35B0D /* LaunchScreen.storyboard */,
 				9DFD29362213ED6200D35B0D /* Info.plist */,
 			);
-			path = "The 10 - Peter";
+			path = "What To Watch";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		9DFD29262213ED5E00D35B0D /* The 10 - Peter */ = {
+		9DFD29262213ED5E00D35B0D /* What To Watch */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9DFD29392213ED6200D35B0D /* Build configuration list for PBXNativeTarget "The 10 - Peter" */;
+			buildConfigurationList = 9DFD29392213ED6200D35B0D /* Build configuration list for PBXNativeTarget "What To Watch" */;
 			buildPhases = (
 				9DFD29232213ED5E00D35B0D /* Sources */,
 				9DFD29242213ED5E00D35B0D /* Frameworks */,
@@ -158,9 +166,9 @@
 			);
 			dependencies = (
 			);
-			name = "The 10 - Peter";
+			name = "What To Watch";
 			productName = "The 10 - Peter";
-			productReference = 9DFD29272213ED5E00D35B0D /* The 10 - Peter.app */;
+			productReference = 9DFD29272213ED5E00D35B0D /* What To Watch.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -191,7 +199,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				9DFD29262213ED5E00D35B0D /* The 10 - Peter */,
+				9DFD29262213ED5E00D35B0D /* What To Watch */,
 			);
 		};
 /* End PBXProject section */
@@ -220,7 +228,7 @@
 				9DD235CC221A5A3A00674B3C /* DetailsCell.swift in Sources */,
 				9DFD292B2213ED5E00D35B0D /* AppDelegate.swift in Sources */,
 				9DD235CA221A292600674B3C /* ErrorLoadingDataCell.swift in Sources */,
-				9DFD293F2214A72800D35B0D /* JSONStructs.swift in Sources */,
+				9DFD293F2214A72800D35B0D /* MovieListModel.swift in Sources */,
 				9DFD293D22149B4400D35B0D /* NetworkingClient.swift in Sources */,
 				9DCA390F221725680010CFCB /* SingleViewController.swift in Sources */,
 				9DD235C6221A102200674B3C /* Extensions.swift in Sources */,
@@ -376,12 +384,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8D5XPQFN4B;
-				INFOPLIST_FILE = "The 10 - Peter/Info.plist";
+				INFOPLIST_FILE = "What To Watch/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.peterirving.The-10---Peter";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.peterirving.What-To-Watch";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -394,12 +402,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8D5XPQFN4B;
-				INFOPLIST_FILE = "The 10 - Peter/Info.plist";
+				INFOPLIST_FILE = "What To Watch/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.peterirving.The-10---Peter";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.peterirving.What-To-Watch";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -418,7 +426,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9DFD29392213ED6200D35B0D /* Build configuration list for PBXNativeTarget "The 10 - Peter" */ = {
+		9DFD29392213ED6200D35B0D /* Build configuration list for PBXNativeTarget "What To Watch" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9DFD293A2213ED6200D35B0D /* Debug */,

@@ -8,27 +8,38 @@
 
 import UIKit
 
+protocol TitleAndPosterCellDelegate: class {
+    func onTap(posterImage: UIImage)
+}
+
 class TitleAndPosterCell: UICollectionViewCell {
+    
+    weak var delegate: TitleAndPosterCellDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         setupViews()
+
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
+        tap.isEnabled = true
+        posterImageView.addGestureRecognizer(tap)
+        posterImageView.isUserInteractionEnabled = true
+    }
+    
+    @objc func handleTap(sender: UITapGestureRecognizer) {
+        delegate?.onTap(posterImage: posterImageView.image ?? UIImage(named: "imageUploadFail")!)
     }
     
     let posterImageView: CustomImageView = {
         
         // 3.25 X 4.75 aspect ratio for image
-        
         let imageView = CustomImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        
         return imageView
-        
     }()
     
- 
     let borderView: UIView = {
         
         let view = UIView()

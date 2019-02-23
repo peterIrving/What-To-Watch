@@ -29,7 +29,7 @@ class ListViewCVCell: UICollectionViewCell {
     let titleLabel: UILabel = {
         
         let label = UILabel()
-        label.text = "hey"
+        label.text = ""
         label.textColor = UIColor.getGold()
         label.font = UIFont.systemFont(ofSize: 36)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -38,24 +38,24 @@ class ListViewCVCell: UICollectionViewCell {
         return label
     }()
     
-    // I want it to stay highlighted when I scroll...
-    override var isHighlighted: Bool {
-        didSet{
-            backdropImageView.alpha = isHighlighted ? 0.3 : 1.0
-            titleLabel.isHidden = isHighlighted ? false : true
-        }
-    }
+    // MARK: - Come back to: This dims background and shows title upon highlight, but dimming does not last while scrolling
+//    override var isHighlighted: Bool {
+//        didSet{
+//            backdropImageView.alpha = isHighlighted ? 0.3 : 1.0
+//            titleLabel.isHidden = isHighlighted ? false : true
+//        }
+//    }
     
     func setupViews() {
         self.backgroundColor = .black
         
         addSubview(backdropImageView)
-        addSubview(titleLabel)
+//        addSubview(titleLabel)
         
         addConstraintsWithFormat(format: "V:|[v0]|", views: backdropImageView)
         addConstraintsWithFormat(format: "H:|-6-[v0]-6-|", views: backdropImageView)
-        addConstraintsWithFormat(format: "V:|-24-[v0]-24-|", views: titleLabel)
-        addConstraintsWithFormat(format: "H:|-24-[v0]-24-|", views: titleLabel)
+//        addConstraintsWithFormat(format: "V:|-24-[v0]-24-|", views: titleLabel)
+//        addConstraintsWithFormat(format: "H:|-24-[v0]-24-|", views: titleLabel)
     }
     
     required init?(coder aDecoder: NSCoder) {

@@ -1,62 +1,48 @@
 //
-//  NetworkingClient.swift
-//  The 10 - Peter
+//  Helpers.swift
+//  What To Watch
 //
-//  Created by Peter Irving on 2/13/19.
+//  Created by Peter Irving on 2/17/19.
 //  Copyright © 2019 Peter Irving. All rights reserved.
 //
 
 import UIKit
 
-class NetworkingClient {
+class MovieDataHelpers {
     
-    func grabMovieList(_ url: URL, callback: @escaping(MovieList?, Error?) -> ()) {
+    static func fullLanguageName(languageAbbrv: String) -> String {
         
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
-           
-            if let error = error {
-                print(error.localizedDescription)
-                callback(nil, error)
-            }
-            // also check response status 200 okay
-            
-            guard let data = data else { return }
-
-            do {
-                let movieList = try JSONDecoder().decode(MovieList.self, from: data)
-                print("movieList Decoded")
-                callback(movieList, nil)
-               
-            } catch {
-                print(error, "error parsing")
-                callback(nil, error)
-            }
-        }.resume()
-
-    }
-    
-    func getImageFromURL(urlString: String) -> UIImage? {
-        
-        var returnedImage: UIImage?
-        
-        if let url = URL(string: urlString) {
-            
-            do {
-                let data = try Data(contentsOf: url)
-                returnedImage = UIImage(data: data)!
-            } catch let err {
-                print("Error: ", err.localizedDescription)
-            }
+        switch languageAbbrv {
+        case "en":
+            return "English"
+        case "ja":
+            return "Japanese"
+        case "ru":
+            return "Russian"
+        case "zh":
+            return "Mandarin"
+        case "fr":
+            return "French"
+        case "es":
+            return "Spanish"
+        case "it":
+            return "Italian"
+        default:
+            return ""
         }
-        return returnedImage
     }
     
     // This should be an API call
-    func grabGenres(listOfIds: [Int]) -> String{
+    static func grabGenres(listOfIds: [Int]) -> String{
         
         var arrayOfGenres: [String] = []
         
-        for i in 0..<listOfIds.count {
+        var numberOfResponses = listOfIds.count
+        if numberOfResponses > 3 {
+            numberOfResponses = 3
+        }
+        
+        for i in 0..<numberOfResponses {
             
             switch listOfIds[i] {
             case 28:
@@ -106,7 +92,7 @@ class NetworkingClient {
         return returnGenreString(arrayOfGenres: arrayOfGenres)
     }
     
-    func returnGenreString(arrayOfGenres: [String]) -> String {
+    static func returnGenreString(arrayOfGenres: [String]) -> String {
         var stringOfGenres = "Genre: "
         if arrayOfGenres.count > 1 {
             stringOfGenres = "Genres: "
@@ -120,4 +106,6 @@ class NetworkingClient {
         }
         return stringOfGenres
     }
+    
 }
+
